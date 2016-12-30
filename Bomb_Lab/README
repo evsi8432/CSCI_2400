@@ -1,0 +1,11 @@
+This is bomb 361.
+
+It belongs to evsi8432 (evsi8432@colorado.edu)
+
+This lab involves using objdump and gdb to step through a
+compiled program which takes in 5 strings. Each string
+corresponds to a funciton in the program. Each function 
+requires a particular string in order to return the correct
+value so that the program continues to run. It requires the
+recognition of recursive functions and various data structures
+in x86-assembly language.
