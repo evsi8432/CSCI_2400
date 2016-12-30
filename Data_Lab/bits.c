@@ -182,7 +182,7 @@ int bitNor(int x, int y) {
 	
 	// just use demorgan's law
 	
-  return (~x) & (~y);
+  	return ~x & ~y;
 }
 /* 
  * TMax - return maximum two's complement integer 
@@ -194,7 +194,7 @@ int tmax(void) {
 	
 	// tmax is 0111... so we shift one over and take the ~ operator
   
-  return ~(1 << 31); 
+  	return ~(1 << 31); 
 }
 // rating 2
 /* 
@@ -218,7 +218,7 @@ int fitsBits(int x, int n) {
 					   // be represented 
 	x = x + 1; 	// now it will be either 0 or 1
 	x = x >> 1; // now it will just be 0
-    return !x; // take the not
+    	return !x; // take the not
 }
 /* 
  * divpwr2 - Compute x/(2^n), for 0 <= n <= 30
@@ -236,14 +236,14 @@ int divpwr2(int x, int n) {
 	// the result is negative, and then we find if x is divisible by 
 	// 2^n. Then we do the divsion and add 1 if needed.
 	
-    int neg = (x >> 31); // all 1's if neg, all 0 if pos
-    int figs = ~0 << n; // ones where we don't care, zeros where x needs
+    	int neg = (x >> 31); // all 1's if neg, all 0 if pos
+    	int figs = ~0 << n; // ones where we don't care, zeros where x needs
 						// to have zeros
-    int div = !((figs|~x) + 1); // figs|~x = -1 if x has zeros where figs
+    	int div = !((figs|~x) + 1); // figs|~x = -1 if x has zeros where figs
 								// has zeros +1 -> 0, div = 1 if divisible
-    int add = neg & !div; // we need to add one to negative numbers that 
+    	int add = neg & !div; // we need to add one to negative numbers that 
 						  // aren't perfectly divisible
-    return (x>>n) + add;  // this is the division itself
+    	return (x>>n) + add;  // this is the division itself
 }
 /* 
  * isNotEqual - return 0 if x == y, and 1 otherwise 
@@ -257,7 +257,7 @@ int isNotEqual(int x, int y) {
 	// x^y = 0 if x=y, but we need to bang twice
 	// to convert x ~= y from (not 0) to 0 to 1
 	
-    return !(!(x^y)); 
+    	return !(!(x^y)); 
 }
 /* 
  * bitXor - x^y using only ~ and & 
@@ -272,7 +272,7 @@ int bitXor(int x, int y) {
 	// (not x and not y), and we can't have (x and y).
 	// What is left IS Xor.
 	
-  return ~(~x & ~y) & ~(x & y);
+  	return ~(~x & ~y) & ~(x & y);
 }
 /* 
  * copyLSB - set all bits of result to least significant bit of x
@@ -286,7 +286,7 @@ int copyLSB(int x) {
 	// just use a mask of 1 to get the LSB and use bang to switch them.
 	// Then add it to -1 so that 1 -> 0 -> -1 and 0 -> 1 -> 0. Done.
 	
-  return ~0 + !(1 & x); // get 1 if LSB(x) = 0 and 0 otherwise
+  	return ~0 + !(1 & x); // get 1 if LSB(x) = 0 and 0 otherwise
 						// then add 1 to -1 if LSB(x) = 0 to get 0
 						// or don't and get -1 (all 1's) if LSB(x) = 1
 }
@@ -304,11 +304,11 @@ int reverseBytes(int x) {
 	// a mask to filter out the other bytes. Add all the bytes together 
 	// at the end
 	
-  int x1 = x << 24; // move the first byte to the last
-  int x2 = (x << 8) & (255 << 16); // move the second to the third (using a mask)
-  int x3 = (x >> 8) & (255 << 8); // move the third to the second (using a mask)
-  int x4 = (x >> 24) & (255); // move the last to the first (using a mask)
-  return x1|x2|x3|x4; // combine them all together
+  	int x1 = x << 24; // move the first byte to the last
+  	int x2 = (x << 8) & (255 << 16); // move the second to the third (using a mask)
+  	int x3 = (x >> 8) & (255 << 8); // move the third to the second (using a mask)
+  	int x4 = (x >> 24) & (255); // move the last to the first (using a mask)
+  	return x1|x2|x3|x4; // combine them all together
 }
 /* 
  * logicalShift - shift x to the right by n, using a logical shift
@@ -323,9 +323,9 @@ int logicalShift(int x, int n) {
 	// Just do the shift and then make a mask that will turn all of the
 	// new shifted values into zeros using the & operator.
 	
-  int ans = x >> n; // just do the shift
-  int mask = ~(1 << 31 >> n << 1); // now make zeros where we need zeros
-  return (ans & mask); // & operator puts zeros of mask in to result
+  	int ans = x >> n; // just do the shift
+  	int mask = ~(1 << 31 >> n << 1); // now make zeros where we need zeros
+  	return (ans & mask); // & operator puts zeros of mask in to result
 }
 /* 
  * isGreater - if x > y  then return 1, else return 0 
@@ -366,9 +366,9 @@ int bitMask(int highbit, int lowbit) {
 	// the RIGHT of that number, and then ue the & operator to combine
 	// them
 	
-  int a = (~0 << lowbit); // make 0s below mask
-  int b = ~((~0 << highbit) << 1); // make 0s above mask
-  return a&b; //only show where 1s overlap
+  	int a = (~0 << lowbit); // make 0s below mask
+  	int b = ~((~0 << highbit) << 1); // make 0s above mask
+  	return a&b; //only show where 1s overlap
 }
 // rating 4
 /* 
